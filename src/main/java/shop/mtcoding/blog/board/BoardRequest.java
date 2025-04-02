@@ -10,7 +10,7 @@ public class BoardRequest {
         private String content;
         private String author;
     }
-
+    
     @Data
     public static class UpdateDTO {
         private String title;

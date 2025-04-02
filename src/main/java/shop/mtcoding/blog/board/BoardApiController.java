@@ -12,7 +12,7 @@ public class BoardApiController {
     private final BoardRepository boardRepository;
 
     @PutMapping("/api/boards/{id}")
-    public ApiUtil<?> update(@PathVariable int id, @RequestBody BoardRequest.UpdateDTO requestDTO) {
+    public ApiUtil<?> update(@PathVariable("id") int id, @RequestBody BoardRequest.UpdateDTO requestDTO) {
         boardRepository.updateById(requestDTO, id);
         return new ApiUtil<>(null);
     }
@@ -26,7 +26,6 @@ public class BoardApiController {
 
     @DeleteMapping("/api/boards/{id}")
     public ApiUtil<?> deleteById(@PathVariable Integer id) {
-        Board board = boardRepository.selectOne(id);
         boardRepository.deleteById(id);
         return new ApiUtil<>(null);
     }
@@ -34,7 +33,14 @@ public class BoardApiController {
     @GetMapping("/api/boards/{id}")
     public ApiUtil<?> findById(@PathVariable("id") int id) {
         Board board = boardRepository.selectOne(id);
-        return new ApiUtil<>(board); // MessageConverter
+
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        return new ApiUtil<>(board);
     }
 
     @GetMapping("/api/boards")
