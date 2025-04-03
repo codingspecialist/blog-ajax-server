@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +20,13 @@ public class BoardApiController {
 
 
     @PostMapping("/api/boards")
-    public ApiUtil<?> write(@RequestBody BoardRequest.WriteDTO requestDTO) {
+    public ApiUtil<?> write(@RequestBody BoardRequest.WriteDTO requestDTO, HttpServletResponse response) {
         boardRepository.insert(requestDTO);
         return new ApiUtil<>(null);
     }
 
     @DeleteMapping("/api/boards/{id}")
-    public ApiUtil<?> deleteById(@PathVariable Integer id) {
+    public ApiUtil<?> deleteById(@PathVariable("id") Integer id) {
         boardRepository.deleteById(id);
         return new ApiUtil<>(null);
     }
